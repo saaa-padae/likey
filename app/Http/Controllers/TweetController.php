@@ -152,5 +152,19 @@ class TweetController extends Controller
         return view('tweet.index', compact('tweets'));
     }
 
+    public function likes()
+    {
+        $favorites = User::find(Auth::id())->tweets->pluck('id')->all();
+        // Userモデルに定義したリレーションを使用してデータを取得する．
+        //$tweet->users()->where('user_id', Auth::id())->exists();
+        $tweets = Tweet::query()
+            //->where('user_id', Auth::id())
+            ->where('id', $favorites)
+            ->orderBy('updated_at','desc')
+            ->get();
+        return view('tweet.likes', compact('tweets'));
+    }
+    
+
 
 }
