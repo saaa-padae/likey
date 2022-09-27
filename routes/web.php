@@ -18,6 +18,7 @@ use App\Http\Controllers\SearchController;
 */
 
 Route::group(['middleware' => 'auth'], function () {
+  Route::get('/tweet/likes', [TweetController::class, 'likes'])->name('tweet.likes');
   Route::get('/tweet/search/input', [SearchController::class, 'create'])->name('search.input');
   Route::get('/tweet/search/result', [SearchController::class, 'index'])->name('search.result');
   Route::get('/tweet/timeline', [TweetController::class, 'timeline'])->name('tweet.timeline');
